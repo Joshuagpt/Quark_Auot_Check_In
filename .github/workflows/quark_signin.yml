@@ -2,8 +2,8 @@ name: 夸克网盘每日签到
 
 on:
   schedule:
-    - cron: "0 1 * * *" # 北京时间 09:00
-    - cron: "0 5 * * *" # 北京时间 13:00，失败兜底
+    - cron: "30 23 * * *"   # UTC 23:30 → 北京时间约 07:30
+    - cron: "30 3 * * *"    # UTC 03:30 → 北京时间约 11:30，失败兜底
   workflow_dispatch:
 
 permissions:
@@ -45,7 +45,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             max_delay=10
           else
-            max_delay=60
+            max_delay=30
           fi
           delay=$((RANDOM % (max_delay + 1)))
           echo "随机延迟 ${delay} 秒后开始执行。"
